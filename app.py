@@ -5,7 +5,7 @@ tasks = []
 
 @app.route("/")
 def home():
-    return "Task Manager v2 - Add and Update Task"
+    return "Task Manager v3 - Add, Update and View Tasks"
 
 @app.route("/tasks", methods=["POST"])
 def add_task():
@@ -26,6 +26,10 @@ def update_task(task_id):
             task["status"] = data["status"]
             return jsonify({"message": "Status updated", "task": task})
     return jsonify({"error": "Task not found"}), 404
+
+@app.route("/tasks", methods=["GET"])
+def view_tasks():
+    return jsonify(tasks)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
